@@ -13,10 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PaintPane extends BorderPane {
 
@@ -111,14 +108,14 @@ public class PaintPane extends BorderPane {
 
 		canvas.setOnMouseReleased(event -> {
 			endPoint = new Point(event.getX(), event.getY());
-			if(startPoint == null) {
+			if (startPoint == null) {
 				return;
 			}
-			if(endPoint.getX() < startPoint.getX() || endPoint.getY() < startPoint.getY()) {
+			if (endPoint.getX() < startPoint.getX() || endPoint.getY() < startPoint.getY()) {
 				return;
 			}
 			Figure newFigure;
-			if(rectangleButton.isSelected()) {
+			if (rectangleButton.isSelected()) {
 				newFigure = new Rectangle(startPoint, endPoint);
             } else if (circleButton.isSelected()) {
 				double circleRadius = Math.abs(endPoint.getX() - startPoint.getX());
@@ -209,7 +206,6 @@ public class PaintPane extends BorderPane {
 			}
 		});
 
-
 		deleteButton.setOnAction(event -> {
 			if (selectedFigures != null) {
 				for (Figure figure : canvasState.figures()) {
@@ -289,20 +285,16 @@ public class PaintPane extends BorderPane {
 
 	private boolean figureBelongs(Figure figure, Point eventPoint) {
 		boolean found = false;
-		if(figure instanceof Rectangle) {
-			Rectangle rectangle = (Rectangle) figure;
+		if (figure instanceof Rectangle rectangle) {
 			found = eventPoint.getX() > rectangle.getTopLeft().getX() && eventPoint.getX() < rectangle.getBottomRight().getX() &&
 					eventPoint.getY() > rectangle.getTopLeft().getY() && eventPoint.getY() < rectangle.getBottomRight().getY();
-		} else if(figure instanceof Circle) {
-			Circle circle = (Circle) figure;
+		} else if (figure instanceof Circle circle) {
 			found = Math.sqrt(Math.pow(circle.getCenterPoint().getX() - eventPoint.getX(), 2) +
 					Math.pow(circle.getCenterPoint().getY() - eventPoint.getY(), 2)) < circle.getRadius();
-		} else if(figure instanceof Square) {
-			Square square = (Square) figure;
+		} else if (figure instanceof Square square) {
 			found = eventPoint.getX() > square.getTopLeft().getX() && eventPoint.getX() < square.getBottomRight().getX() &&
 					eventPoint.getY() > square.getTopLeft().getY() && eventPoint.getY() < square.getBottomRight().getY();
-		} else if(figure instanceof Ellipse) {
-			Ellipse ellipse = (Ellipse) figure;
+		} else if (figure instanceof Ellipse ellipse) {
 			// Nota: Fórmula aproximada. No es necesario corregirla.
 			found = ((Math.pow(eventPoint.getX() - ellipse.getCenterPoint().getX(), 2) / Math.pow(ellipse.getsMayorAxis(), 2)) +
 					(Math.pow(eventPoint.getY() - ellipse.getCenterPoint().getY(), 2) / Math.pow(ellipse.getsMinorAxis(), 2))) <= 0.30;
