@@ -23,7 +23,7 @@ public class MovableCircle extends Circle<MovablePoint> implements MovableFigure
     {
         List<Double> ans = new ArrayList<>();
 
-        ans.add(getsMayorAxis());/*Radius*/
+        ans.add(getsMayorAxis()); /*Radius*/
 
         return ans;
     }

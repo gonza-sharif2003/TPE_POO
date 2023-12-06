@@ -19,8 +19,8 @@ public class MovableEllipse extends Ellipse<MovablePoint> implements MovableFigu
     {
         List<Double> ans = new ArrayList<>();
 
-        ans.add(getsMayorAxis());/*[0] = Mayor Axis*/
-        ans.add(getsMinorAxis());/*[1] = Minor Axis*/
+        ans.add(getsMayorAxis()); // [0] = Mayor Axis
+        ans.add(getsMinorAxis()); // [1] = Minor Axis
 
         return ans;
     }

@@ -27,11 +27,6 @@ public class Ellipse<P extends Point> extends Figure {
         return sMinorAxis;
     }
     @Override
-    public void move(double diffX, double diffY) {
-        centerPoint.x += diffX;
-        centerPoint.y += diffY;
-    }
-    @Override
     public boolean pointBelongs(Point point) {
         return ((Math.pow(point.getX() - centerPoint.getX(), 2) / Math.pow(sMayorAxis, 2)) +
                 (Math.pow(point.getY() - centerPoint.getY(), 2) / Math.pow(sMinorAxis, 2))) <= 0.30;

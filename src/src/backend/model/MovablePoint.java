@@ -6,7 +6,7 @@ public class MovablePoint extends Point implements Movable {
     }
     @Override
     public void move(double diffX, double diffY){
-        x+=diffX;
-        y+=diffY;
+        x += diffX;
+        y += diffY;
     }
 }
