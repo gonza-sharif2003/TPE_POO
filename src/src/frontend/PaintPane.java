@@ -70,6 +70,7 @@ public class PaintPane extends BorderPane {
 	Map<MovableFigure, Color> figureColorMap = new HashMap<>();
 	Map<ToggleButton, MovableFigure> figureMap = new HashMap<>();
 	private Map<MovableFigure, Boolean> shadowStates = new HashMap<>();
+	private Map<MovableFigure, Boolean> gradientStates = new HashMap<>();
 	ToggleButton[] toolsArr = {selectionButton, rectangleButton, circleButton, squareButton, ellipseButton, deleteButton, groupButton, ungroupButton, turnRightButton, horizontalButton, verticalButton, biggerButton, smallerButton};
 
 	public PaintPane(CanvasState canvasState, StatusPane statusPane) {
@@ -133,6 +134,11 @@ public class PaintPane extends BorderPane {
 				shadowStates.put(newFigure, true);
 			} else {
 				shadowStates.put(newFigure, false);
+			}
+			if (gradientButton.isSelected()) {
+				gradientStates.put(newFigure, true);
+			} else {
+				gradientStates.put(newFigure, false);
 			}
 			startPoint = null;
 			redrawCanvas();
@@ -222,6 +228,9 @@ public class PaintPane extends BorderPane {
 			newColoreableFigure.setColor(figureColorMap.get(figure));
 			if (shadowStates.get(figure)) {
 				newColoreableFigure.setShadow();
+			}
+			if (gradientStates.get(figure)) {
+				newColoreableFigure.setGradient();
 			}
 			if (selectedFigure == figure) {
 				newColoreableFigure.setIsSelected();
