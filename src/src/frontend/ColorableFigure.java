@@ -6,13 +6,13 @@ import javafx.scene.paint.*;
 
 import java.util.List;
 
-public class ColoreableFigure {
+public class ColorableFigure {
     private final MovableFigure figure;
     private Color color = Color.YELLOW;
     private final GraphicsContext gc;
     private boolean isSelected = false;
 
-    public ColoreableFigure(MovableFigure figure, GraphicsContext gc) {
+    public ColorableFigure(MovableFigure figure, GraphicsContext gc) {
         this.figure = figure;
         this.gc = gc;
     }

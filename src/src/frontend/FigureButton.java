@@ -3,11 +3,11 @@ package frontend;
 import javafx.scene.control.ToggleButton;
 
 public abstract class FigureButton {
-    private final ColoreableFigure figure;
+    private final ColorableFigure figure;
     private final ToggleButton button;
     private boolean isSelected;
 
-    public FigureButton(ColoreableFigure figure, ToggleButton button) {
+    public FigureButton(ColorableFigure figure, ToggleButton button) {
         this.figure = figure;
         this.button = button;
     }
@@ -16,7 +16,7 @@ public abstract class FigureButton {
         return button;
     }
 
-    public ColoreableFigure getFigure() {
+    public ColorableFigure getFigure() {
         return figure;
     }
 

@@ -211,7 +211,7 @@ public class PaintPane extends BorderPane {
 	void redrawCanvas() {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		for (MovableFigure figure : canvasState.figures()) {
-			ColoreableFigure newColoreableFigure = new ColoreableFigure(figure, gc);
+			ColorableFigure newColoreableFigure = new ColorableFigure(figure, gc);
 			newColoreableFigure.setColor(figureColorMap.get(figure));
 			if (selectedFigure == figure) {
 				newColoreableFigure.setIsSelected();
