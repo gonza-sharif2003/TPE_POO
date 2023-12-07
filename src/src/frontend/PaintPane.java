@@ -69,6 +69,7 @@ public class PaintPane extends BorderPane {
 	// Colores de relleno de cada figura
 	Map<MovableFigure, Color> figureColorMap = new HashMap<>();
 	Map<ToggleButton, MovableFigure> figureMap = new HashMap<>();
+	private Map<MovableFigure, Boolean> shadowStates = new HashMap<>();
 	ToggleButton[] toolsArr = {selectionButton, rectangleButton, circleButton, squareButton, ellipseButton, deleteButton, groupButton, ungroupButton, turnRightButton, horizontalButton, verticalButton, biggerButton, smallerButton};
 
 	public PaintPane(CanvasState canvasState, StatusPane statusPane) {
@@ -125,8 +126,14 @@ public class PaintPane extends BorderPane {
 			if (newFigure == null) {
 				return;
 			}
+
 			figureColorMap.put(newFigure, fillColorPicker.getValue());
 			canvasState.addFigure(newFigure);
+			if (shadowButton.isSelected()) {
+				shadowStates.put(newFigure, true);
+			} else {
+				shadowStates.put(newFigure, false);
+			}
 			startPoint = null;
 			redrawCanvas();
 		});
@@ -213,6 +220,9 @@ public class PaintPane extends BorderPane {
 		for (MovableFigure figure : canvasState.figures()) {
 			ColorableFigure newColoreableFigure = new ColorableFigure(figure, gc);
 			newColoreableFigure.setColor(figureColorMap.get(figure));
+			if (shadowStates.get(figure)) {
+				newColoreableFigure.setShadow();
+			}
 			if (selectedFigure == figure) {
 				newColoreableFigure.setIsSelected();
 			}
