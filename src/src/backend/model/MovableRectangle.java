@@ -24,4 +24,15 @@ public class MovableRectangle extends Rectangle<MovablePoint> implements Movable
         return ans;
     }
 
+    @Override
+    public boolean belongs(MovablePoint point) {
+        return point.getX() > getTopLeft().getX() && point.getX() < getBottomRight().getX() &&
+                point.getY() > getTopLeft().getY() && point.getY() < getBottomRight().getY();
+    }
+
+    @Override
+    public void accept(FigureVisitor visitor) {
+        visitor.visitRectangle(this);
+    }
+
 }

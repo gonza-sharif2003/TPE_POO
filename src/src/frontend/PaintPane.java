@@ -136,7 +136,7 @@ public class PaintPane extends BorderPane {
 			boolean found = false;
 			StringBuilder label = new StringBuilder();
 			for (MovableFigure figure : canvasState.figures()) {
-				if (figureBelongs(figure, eventPoint)) {
+				if (figure.belongs(eventPoint)) {
 					found = true;
 					label.append(figure.toString());
 				}
@@ -154,7 +154,7 @@ public class PaintPane extends BorderPane {
 				boolean found = false;
 				StringBuilder label = new StringBuilder("Se seleccionó: ");
 				for (MovableFigure figure : canvasState.figures()) {
-					if(figureBelongs(figure, eventPoint)) {
+					if (figure.belongs(eventPoint)) {
 						found = true;
 						selectedFigure = figure;
 						label.append(figure.toString());
@@ -258,29 +258,6 @@ public class PaintPane extends BorderPane {
 		}
 		gc.strokeOval(centerPoint.getX() - (mayorAxis / 2), centerPoint.getY() - (minorAxis / 2), mayorAxis, minorAxis);
 		gc.fillOval(centerPoint.getX() - (mayorAxis / 2), centerPoint.getY() - (minorAxis / 2), mayorAxis, minorAxis);
-	}
-
-	private boolean figureBelongs(MovableFigure figure, MovablePoint eventPoint) {
-		boolean found = false;
-		if (figure instanceof Rectangle rectangle) {
-			found = eventPoint.getX() > rectangle.getTopLeft().getX() && eventPoint.getX() < rectangle.getBottomRight().getX() &&
-					eventPoint.getY() > rectangle.getTopLeft().getY() && eventPoint.getY() < rectangle.getBottomRight().getY();
-		} else if (figure instanceof Circle circle) {
-			found = Math.sqrt(Math.pow(circle.getCenterPoint().getX() - eventPoint.getX(), 2) +
-					Math.pow(circle.getCenterPoint().getY() - eventPoint.getY(), 2)) < circle.getsMayorAxis();
-		} else if (figure instanceof Square square) {
-			found = eventPoint.getX() > square.getTopLeft().getX() && eventPoint.getX() < square.getBottomRight().getX() &&
-					eventPoint.getY() > square.getTopLeft().getY() && eventPoint.getY() < square.getBottomRight().getY();
-		} else if (figure instanceof Ellipse ellipse) {
-			// Nota: Fórmula aproximada. No es necesario corregirla.
-			found = ((Math.pow(eventPoint.getX() - ellipse.getCenterPoint().getX(), 2) / Math.pow(ellipse.getsMayorAxis(), 2)) +
-					(Math.pow(eventPoint.getY() - ellipse.getCenterPoint().getY(), 2) / Math.pow(ellipse.getsMinorAxis(), 2))) <= 0.30;
-		}
-		return found;
-	}
-
-	private boolean figureBelongsInRectangle(MovableFigure figure, Rectangle<MovablePoint> rectangle) {
-		return figureBelongs(figure, rectangle.getTopLeft()) || figureBelongs(figure, rectangle.getBottomRight());
 	}
 
 }
